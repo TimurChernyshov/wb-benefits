@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WB Банк — Бенефиты</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.x/dist/tabler-icons.min.css">
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: #1a1025;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 16px;
+      font-family: -apple-system, 'SF Pro Display', 'Helvetica Neue', sans-serif;
+    }
+
+    .phone {
+      width: 375px;
+      background: #EEEAF6;
+      min-height: 812px;
+      border-radius: 44px;
+      border: 1px solid #d4cee8;
+      overflow: hidden;
+      position: relative;
+      box-shadow: 0 40px 80px rgba(0,0,0,0.5), 0 0 0 1px rgba(255,255,255,0.08);
+    }
+
+    .status-bar {
+      display: flex; justify-content: space-between; align-items: center;
+      padding: 14px 24px 0;
+      font-size: 12px; font-weight: 600; color: #1a1a1a;
+    }
+
+    .screen { display: flex; flex-direction: column; padding-bottom: 48px; }
+    .content { padding: 12px 12px 0; display: flex; flex-direction: column; gap: 12px; }
+
+    /* ── HERO ── */
+    .hero {
+      background: #fff; border-radius: 20px; overflow: hidden;
+      border: 0.5px solid #e0daf0; margin: 12px 12px 0;
+    }
+    .hb-main { padding: 18px 18px 14px; }
+    .hb-label { font-size: 11px; color: #8b87a0; text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 4px; }
+    .hb-row { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 12px; }
+    .hb-amount { display: flex; align-items: center; gap: 8px; }
+    .hb-num { font-size: 36px; font-weight: 700; color: #1a1a1a; line-height: 1; }
+    .hb-berry {
+      width: 24px; height: 24px; border-radius: 50%; background: #CB11AB;
+      display: flex; align-items: center; justify-content: center; font-size: 13px; margin-bottom: 3px;
+    }
+    .hb-date { font-size: 12px; color: #8b87a0; padding-bottom: 3px; }
+    .hb-bar-bg { height: 5px; background: #ede9f7; border-radius: 3px; overflow: hidden; margin-bottom: 6px; }
+    .hb-bar-fill { height: 100%; border-radius: 3px; background: #CB11AB; width: 25%; }
+    .hb-bar-labels { display: flex; justify-content: space-between; }
+    .hb-pct { font-size: 11px; font-weight: 600; color: #CB11AB; }
+    .hb-limit { font-size: 11px; color: #a09ab8; }
+    .hb-tag {
+      margin: 10px 18px 16px; display: inline-flex; align-items: center; gap: 6px;
+      background: #fff0f8; border-radius: 20px; padding: 6px 12px;
+    }
+    .hb-tag-icon {
+      width: 18px; height: 18px; border-radius: 50%; background: #CB11AB;
+      display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; flex-shrink: 0;
+    }
+    .hb-tag-text { font-size: 12px; font-weight: 600; color: #a3005e; }
+    .hb-divider { height: 0.5px; background: #ede9f7; margin: 0 18px; }
+    .hb-prev {
+      padding: 11px 18px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+    }
+    .hb-prev-name { font-size: 13px; font-weight: 600; color: #1a1a1a; display: flex; align-items: center; gap: 5px; }
+    .hb-prev-sub { font-size: 11px; color: #8b87a0; margin-top: 2px; }
+    .hb-prev-arrow { font-size: 16px; color: #c8c0e0; }
+
+    /* ── SECTION ── */
+    .sec-head { display: flex; align-items: center; justify-content: space-between; margin-bottom: 8px; }
+    .sec-title { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+    .sec-link { font-size: 13px; color: #CB11AB; font-weight: 500; cursor: pointer; }
+
+    /* ── CATEGORIES ── */
+    .cat-card {
+      background: #fff; border-radius: 18px; overflow: hidden;
+      border: 0.5px solid #e0daf0; cursor: pointer;
+    }
+    .cat-top { padding: 14px 16px 10px; display: flex; align-items: center; justify-content: space-between; }
+    .cat-meta-label { font-size: 12px; color: #8b87a0; margin-bottom: 2px; }
+    .cat-meta-cta { font-size: 15px; font-weight: 600; color: #1a1a1a; }
+    .cat-arrow {
+      width: 32px; height: 32px; border-radius: 50%; background: #f4f1fb;
+      display: flex; align-items: center; justify-content: center; font-size: 16px; color: #8b87a0;
+    }
+    .cat-pills { display: flex; gap: 6px; padding: 0 16px 14px; }
+    .cpill {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: 600; white-space: nowrap;
+    }
+    .cpill.on { background: #CB11AB; color: #fff; }
+    .cpill.off { background: #f4f1fb; color: #8b87a0; border: 0.5px dashed #c8c0e0; }
+    .cpill i { font-size: 12px; }
+    .cpill-pct { font-size: 10px; background: rgba(255,255,255,0.22); border-radius: 8px; padding: 1px 5px; margin-left: 2px; }
+
+    /* ── SEGMENT ── */
+    .seg { display: flex; background: #e8e3f4; border-radius: 12px; padding: 3px; gap: 2px; margin-bottom: 10px; }
+    .seg-btn {
+      flex: 1; padding: 8px 0; border: none; border-radius: 9px;
+      font-size: 13px; font-weight: 600; cursor: pointer;
+      background: transparent; color: #8b87a0; transition: all 0.15s;
+    }
+    .seg-btn.on { background: #fff; color: #1a1a1a; border: 0.5px solid #e0daf0; }
+
+    /* ── TASKS ── */
+    .tasks-wrap { display: flex; flex-direction: column; gap: 8px; }
+    .tcard {
+      background: #fff; border-radius: 16px; border: 0.5px solid #e0daf0;
+      padding: 12px 14px; display: flex; align-items: center; gap: 12px; cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .tcard:hover { border-color: #c8c0e0; }
+    .ticon { width: 40px; height: 40px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+    .tbody { flex: 1; min-width: 0; }
+    .tname { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+    .tdesc { font-size: 11px; color: #8b87a0; margin-bottom: 7px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .tprow { display: flex; align-items: center; gap: 8px; }
+    .tbar { flex: 1; height: 4px; background: #ede9f7; border-radius: 2px; overflow: hidden; }
+    .tfill { height: 100%; border-radius: 2px; }
+    .tpct { font-size: 11px; color: #a09ab8; min-width: 28px; text-align: right; }
+    .treward { display: flex; flex-direction: column; align-items: flex-end; gap: 2px; flex-shrink: 0; }
+    .tamt { font-size: 14px; font-weight: 700; }
+    .tlbl { font-size: 10px; color: #a09ab8; }
+
+    /* ── DISCOUNTS ── */
+    .disc-card {
+      background: #fff; border-radius: 16px; border: 0.5px solid #e0daf0;
+      padding: 12px 14px; display: flex; align-items: center; gap: 12px; cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .disc-card:hover { border-color: #c8c0e0; }
+    .disc-logo { width: 44px; height: 44px; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 22px; flex-shrink: 0; }
+    .disc-body { flex: 1; min-width: 0; }
+    .disc-name { font-size: 14px; font-weight: 600; color: #1a1a1a; margin-bottom: 2px; }
+    .disc-desc { font-size: 11px; color: #8b87a0; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .disc-tag { display: inline-flex; align-items: center; gap: 4px; font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 20px; }
+    .disc-val { display: flex; flex-direction: column; align-items: flex-end; gap: 1px; flex-shrink: 0; }
+    .disc-pct { font-size: 20px; font-weight: 700; }
+    .disc-off { font-size: 10px; color: #a09ab8; }
+
+    /* ── DONE ── */
+    .done-row {
+      background: #fff; border-radius: 16px; border: 0.5px solid #e0daf0;
+      padding: 12px 14px; display: flex; align-items: center; justify-content: space-between; cursor: pointer;
+      transition: border-color 0.15s;
+    }
+    .done-row:hover { border-color: #c8c0e0; }
+    .done-left { display: flex; align-items: center; gap: 8px; }
+    .done-label { font-size: 14px; font-weight: 600; color: #1a1a1a; }
+    .done-badge { background: #e8f8ef; color: #1a6640; font-size: 11px; font-weight: 600; padding: 3px 9px; border-radius: 20px; }
+    .done-chev { font-size: 18px; color: #a09ab8; transition: transform 0.2s; }
+    .done-chev.open { transform: rotate(180deg); }
+    .done-list { display: none; flex-direction: column; gap: 8px; margin-top: 8px; }
+    .done-list.open { display: flex; }
+    .dtask {
+      background: #faf9fd; border-radius: 16px; border: 0.5px solid #e0daf0;
+      padding: 11px 14px; display: flex; align-items: center; gap: 10px; opacity: 0.8;
+    }
+    .dicon { width: 36px; height: 36px; border-radius: 10px; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0; }
+    .dbody { flex: 1; }
+    .dname { font-size: 13px; font-weight: 600; color: #1a1a1a; margin-bottom: 1px; }
+    .dsub { font-size: 11px; color: #8b87a0; }
+    .dcheck { width: 24px; height: 24px; border-radius: 50%; background: #e8f8ef; display: flex; align-items: center; justify-content: center; font-size: 13px; color: #2db56b; flex-shrink: 0; }
+
+    .tab-panel { display: none; }
+    .tab-panel.on { display: block; }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      display: none; position: absolute; top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(20,10,40,0.45); z-index: 10; align-items: flex-end;
+      border-radius: 44px; overflow: hidden;
+    }
+    .modal-overlay.open { display: flex; }
+    .modal-sheet { background: #fff; border-radius: 24px 24px 0 0; width: 100%; padding: 0 0 32px; }
+    .mhandle { width: 36px; height: 4px; background: #e0daf0; border-radius: 2px; margin: 12px auto 18px; }
+    .mhead { padding: 0 20px 14px; display: flex; align-items: flex-start; justify-content: space-between; }
+    .mtitle { font-size: 18px; font-weight: 700; color: #1a1a1a; }
+    .msub { font-size: 12px; color: #8b87a0; margin-top: 2px; }
+    .mclose {
+      width: 28px; height: 28px; border-radius: 50%; background: #f4f1fb; border: none;
+      display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 16px; color: #8b87a0;
+    }
+    .mcats { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 8px; padding: 0 20px 16px; }
+    .mcat {
+      display: flex; flex-direction: column; align-items: center; gap: 5px;
+      padding: 13px 8px 11px; border-radius: 14px;
+      border: 0.5px solid #e0daf0; background: #fff; cursor: pointer; position: relative;
+      transition: all 0.15s;
+    }
+    .mcat.sel { border-color: #CB11AB; background: #CB11AB; }
+    .mcat-icon { font-size: 22px; }
+    .mcat-name { font-size: 11px; font-weight: 600; color: #1a1a1a; text-align: center; }
+    .mcat.sel .mcat-name { color: #fff; }
+    .mcat-rate { font-size: 10px; color: #a09ab8; }
+    .mcat.sel .mcat-rate { color: rgba(255,255,255,0.65); }
+    .mcat-chk {
+      position: absolute; top: 6px; right: 6px;
+      width: 15px; height: 15px; border-radius: 50%; background: #fff;
+      display: none; align-items: center; justify-content: center; font-size: 9px; color: #CB11AB;
+    }
+    .mcat.sel .mcat-chk { display: flex; }
+    .mlimit { font-size: 12px; color: #8b87a0; text-align: center; padding: 0 20px 14px; }
+    .mcta {
+      margin: 0 20px; width: calc(100% - 40px); padding: 14px; border-radius: 14px;
+      background: #CB11AB; border: none; color: #fff; font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: opacity 0.15s;
+    }
+    .mcta:hover { opacity: 0.9; }
+  </style>
+</head>
+<body>
+
+<div class="phone">
+  <div class="status-bar">
+    <span>9:41</span>
+    <div style="display:flex;gap:5px;align-items:center;">
+      <i class="ti ti-wifi" style="font-size:13px;" aria-hidden="true"></i>
+      <i class="ti ti-battery" style="font-size:13px;" aria-hidden="true"></i>
+    </div>
+  </div>
+
+  <div class="screen">
+
+    <!-- HERO -->
+    <div class="hero">
+      <div class="hb-main">
+        <div class="hb-label">Кешбэк за май</div>
+        <div class="hb-row">
+          <div class="hb-amount">
+            <span class="hb-num">745</span>
+            <div class="hb-berry">🍓</div>
+          </div>
+          <span class="hb-date">Начислим 11 июня</span>
+        </div>
+        <div class="hb-bar-bg"><div class="hb-bar-fill"></div></div>
+        <div class="hb-bar-labels">
+          <span class="hb-pct">745 из 3 000</span>
+          <span class="hb-limit">осталось 2 255</span>
+        </div>
+      </div>
+      <div class="hb-tag">
+        <div class="hb-tag-icon"><i class="ti ti-cards" style="font-size:11px;" aria-hidden="true"></i></div>
+        <span class="hb-tag-text">До 5% за покупки по карте</span>
+      </div>
+      <div class="hb-divider"></div>
+      <div class="hb-prev">
+        <div>
+          <div class="hb-prev-name">
+            Кешбэк за апрель
+            <i class="ti ti-clock" style="font-size:13px;color:#a09ab8;" aria-hidden="true"></i>
+          </div>
+          <div class="hb-prev-sub">Начислим 1 325 ягодок до 11 мая</div>
+        </div>
+        <i class="ti ti-chevron-right hb-prev-arrow" aria-hidden="true"></i>
+      </div>
+    </div>
+
+    <div class="content">
+
+      <!-- CATEGORIES -->
+      <div>
+        <div class="sec-head">
+          <span class="sec-title">Любимые категории</span>
+          <span class="sec-link" onclick="openModal()">Изменить</span>
+        </div>
+        <div class="cat-card" onclick="openModal()">
+          <div class="cat-top">
+            <div>
+              <div class="cat-meta-label">Выбрано 2 из 3</div>
+              <div class="cat-meta-cta">До 3% кешбэка</div>
+            </div>
+            <div class="cat-arrow"><i class="ti ti-chevron-right" aria-hidden="true"></i></div>
+          </div>
+          <div class="cat-pills">
+            <div class="cpill on"><i class="ti ti-shopping-cart" aria-hidden="true"></i> Продукты <span class="cpill-pct">3%</span></div>
+            <div class="cpill on"><i class="ti ti-train" aria-hidden="true"></i> Транспорт <span class="cpill-pct">2%</span></div>
+            <div class="cpill off"><i class="ti ti-plus" aria-hidden="true"></i> Добавить</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- TASKS & GOALS -->
+      <div>
+        <div class="sec-head">
+          <span class="sec-title">Задания и цели</span>
+        </div>
+        <div class="seg">
+          <button class="seg-btn on" id="seg-cb" onclick="switchTab('cb')">Кешбэк</button>
+          <button class="seg-btn" id="seg-disc" onclick="switchTab('disc')">Скидки</button>
+        </div>
+
+        <!-- CASHBACK TAB -->
+        <div class="tab-panel on" id="tab-cb">
+          <div class="tasks-wrap">
+            <div class="tcard">
+              <div class="ticon" style="background:#edf3ff;"><i class="ti ti-repeat" style="color:#3b6fd4;" aria-hidden="true"></i></div>
+              <div class="tbody">
+                <div class="tname">3 регулярных платежа</div>
+                <div class="tdesc">Подписки, аренда или автоплатежи</div>
+                <div class="tprow">
+                  <div class="tbar"><div class="tfill" style="width:66%;background:#3b6fd4;"></div></div>
+                  <span class="tpct">2/3</span>
+                </div>
+              </div>
+              <div class="treward"><span class="tamt" style="color:#3b6fd4;">2,00 ₽</span><span class="tlbl">кешбэк</span></div>
+            </div>
+            <div class="tcard">
+              <div class="ticon" style="background:#f5eeff;"><i class="ti ti-pig-money" style="color:#7c3aed;" aria-hidden="true"></i></div>
+              <div class="tbody">
+                <div class="tname">Накопить 50 ₽ за месяц</div>
+                <div class="tdesc">Переведите деньги в копилку</div>
+                <div class="tprow">
+                  <div class="tbar"><div class="tfill" style="width:0%;background:#7c3aed;"></div></div>
+                  <span class="tpct">0%</span>
+                </div>
+              </div>
+              <div class="treward"><span class="tamt" style="color:#7c3aed;">1,50 ₽</span><span class="tlbl">кешбэк</span></div>
+            </div>
+            <div class="tcard">
+              <div class="ticon" style="background:#fff0f8;"><i class="ti ti-credit-card" style="color:#CB11AB;" aria-hidden="true"></i></div>
+              <div class="tbody">
+                <div class="tname">Трать в любимых категориях</div>
+                <div class="tdesc">80 из 150 ₽ в выбранных категориях</div>
+                <div class="tprow">
+                  <div class="tbar"><div class="tfill" style="width:53%;background:#CB11AB;"></div></div>
+                  <span class="tpct">53%</span>
+                </div>
+              </div>
+              <div class="treward"><span class="tamt" style="color:#CB11AB;">3,00 ₽</span><span class="tlbl">кешбэк</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DISCOUNTS TAB -->
+        <div class="tab-panel" id="tab-disc">
+          <div class="tasks-wrap">
+            <div class="disc-card">
+              <div class="disc-logo" style="background:#fff0f0;">☕</div>
+              <div class="disc-body">
+                <div class="disc-name">Starbucks</div>
+                <div class="disc-desc">Оплатите картой в любом кофейне</div>
+                <div class="disc-tag" style="background:#edf3ff;color:#1a4db3;"><i class="ti ti-bolt" style="font-size:11px;" aria-hidden="true"></i> Активна в этом месяце</div>
+              </div>
+              <div class="disc-val"><span class="disc-pct" style="color:#1a4db3;">15%</span><span class="disc-off">скидка</span></div>
+            </div>
+            <div class="disc-card">
+              <div class="disc-logo" style="background:#fff8e1;">🎬</div>
+              <div class="disc-body">
+                <div class="disc-name">Синема Парк</div>
+                <div class="disc-desc">Купи 2 билета — 1 в подарок в будни</div>
+                <div class="disc-tag" style="background:#e8f8ef;color:#1a6640;"><i class="ti ti-gift" style="font-size:11px;" aria-hidden="true"></i> После 3 визитов</div>
+              </div>
+              <div class="disc-val"><span class="disc-pct" style="color:#1a6640;">1 билет</span><span class="disc-off">бесплатно</span></div>
+            </div>
+            <div class="disc-card">
+              <div class="disc-logo" style="background:#fff3e0;">🛵</div>
+              <div class="disc-body">
+                <div class="disc-name">Яндекс Еда</div>
+                <div class="disc-desc">Закажи доставку 2 раза в этом месяце</div>
+                <div class="disc-tag" style="background:#fff0f8;color:#a3005e;"><i class="ti ti-clock" style="font-size:11px;" aria-hidden="true"></i> Остался 1 заказ</div>
+              </div>
+              <div class="disc-val"><span class="disc-pct" style="color:#CB11AB;">250 ₽</span><span class="disc-off">скидка</span></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DONE SECTION -->
+        <div style="margin-top:8px;">
+          <div class="done-row" onclick="toggleDone()">
+            <div class="done-left">
+              <span class="done-label">Выполненные</span>
+              <span class="done-badge">2 задания</span>
+            </div>
+            <i class="ti ti-chevron-down done-chev" id="done-chev" aria-hidden="true"></i>
+          </div>
+          <div class="done-list" id="done-list">
+            <div class="dtask">
+              <div class="dicon" style="background:#e8f8ef;"><i class="ti ti-device-mobile" style="color:#2db56b;" aria-hidden="true"></i></div>
+              <div class="dbody"><div class="dname">Подключить Apple Pay</div><div class="dsub">Кешбэк · +1,00 ₽ начислено</div></div>
+              <div class="dcheck"><i class="ti ti-check" aria-hidden="true"></i></div>
+            </div>
+            <div class="dtask">
+              <div class="dicon" style="background:#fff8e1;"><i class="ti ti-building-store" style="color:#a16207;" aria-hidden="true"></i></div>
+              <div class="dbody"><div class="dname">Скидка в ВкусВилл</div><div class="dsub">Скидка · использована 10%</div></div>
+              <div class="dcheck"><i class="ti ti-check" aria-hidden="true"></i></div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- CATEGORY MODAL -->
+  <div class="modal-overlay" id="modal">
+    <div class="modal-sheet">
+      <div class="mhandle"></div>
+      <div class="mhead">
+        <div>
+          <div class="mtitle">Любимые категории</div>
+          <div class="msub">Выберите до 3 — повышенный кешбэк</div>
+        </div>
+        <button class="mclose" onclick="closeModal()"><i class="ti ti-x" aria-hidden="true"></i></button>
+      </div>
+      <div class="mcats" id="catGrid"></div>
+      <div class="mlimit" id="limitNote"></div>
+      <button class="mcta" onclick="closeModal()">Сохранить выбор</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const cats = [
+    {icon:"🛒",name:"Продукты",rate:"3% кешбэк",sel:true},
+    {icon:"🚆",name:"Транспорт",rate:"2% кешбэк",sel:true},
+    {icon:"☕",name:"Кофейни",rate:"2% кешбэк",sel:false},
+    {icon:"⛽",name:"Топливо",rate:"2% кешбэк",sel:false},
+    {icon:"💊",name:"Аптека",rate:"1.5% кешбэк",sel:false},
+    {icon:"🍽️",name:"Рестораны",rate:"1.5% кешбэк",sel:false},
+    {icon:"✈️",name:"Путешествия",rate:"2% кешбэк",sel:false},
+    {icon:"🎮",name:"Игры",rate:"1% кешбэк",sel:false},
+    {icon:"📦",name:"Онлайн",rate:"1% кешбэк",sel:false},
+  ];
+  const MAX = 3;
+
+  function renderCats() {
+    const grid = document.getElementById("catGrid");
+    grid.innerHTML = "";
+    cats.forEach(c => {
+      const el = document.createElement("div");
+      el.className = "mcat" + (c.sel ? " sel" : "");
+      el.innerHTML = `<div class="mcat-chk"><i class="ti ti-check"></i></div><span class="mcat-icon">${c.icon}</span><span class="mcat-name">${c.name}</span><span class="mcat-rate">${c.rate}</span>`;
+      el.onclick = () => {
+        const n = cats.filter(x => x.sel).length;
+        if (!c.sel && n >= MAX) return;
+        c.sel = !c.sel;
+        renderCats();
+      };
+      grid.appendChild(el);
+    });
+    const n = cats.filter(x => x.sel).length;
+    const r = MAX - n;
+    document.getElementById("limitNote").textContent =
+      r === 0 ? "Максимум 3 категории выбрано" :
+      r === 1 ? "Можно добавить ещё 1 категорию" :
+      `Можно добавить ещё ${r} категории`;
+  }
+
+  function switchTab(tab) {
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('on'));
+    document.querySelectorAll('.seg-btn').forEach(b => b.classList.remove('on'));
+    document.getElementById('tab-' + tab).classList.add('on');
+    document.getElementById('seg-' + tab).classList.add('on');
+  }
+
+  function toggleDone() {
+    document.getElementById('done-list').classList.toggle('open');
+    document.getElementById('done-chev').classList.toggle('open');
+  }
+
+  function openModal() {
+    document.getElementById("modal").classList.add("open");
+    renderCats();
+  }
+
+  function closeModal() {
+    document.getElementById("modal").classList.remove("open");
+  }
+</script>
+
+</body>
+</html>
